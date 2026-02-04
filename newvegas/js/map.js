@@ -1,28 +1,44 @@
-// Fallout New Vegas Map Engine - Canvas-based pan/zoom
+// Fallout New Vegas Map Engine - Canvas-based with actual game map
 
 class MapEngine {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
+
+        // Map image
+        this.mapImage = new Image();
+        this.mapLoaded = false;
         this.mapWidth = 800;
         this.mapHeight = 800;
-        this.viewport = { x: 0, y: 0, zoom: 1, minZoom: 0.5, maxZoom: 3 };
+
+        // Viewport state
+        this.viewport = { x: 0, y: 0, zoom: 1, minZoom: 0.3, maxZoom: 4 };
+
+        // Interaction state
         this.isDragging = false;
         this.lastMousePos = { x: 0, y: 0 };
         this.hoveredMarker = null;
         this.selectedMarker = null;
+
+        // Markers
         this.markers = [];
         this.visibleCategories = new Set();
+
+        // Callbacks
         this.onMarkerHover = null;
         this.onMarkerClick = null;
         this.onViewportChange = null;
+
+        // Touch support
         this.touches = [];
         this.lastPinchDistance = 0;
+
         this.init();
     }
 
     init() {
         this.resizeCanvas();
+        this.loadMapImage();
         this.setupEventListeners();
         this.startRenderLoop();
     }
@@ -34,10 +50,21 @@ class MapEngine {
         this.centerMap();
     }
 
+    loadMapImage() {
+        this.mapImage.onload = () => {
+            this.mapWidth = this.mapImage.width;
+            this.mapHeight = this.mapImage.height;
+            this.mapLoaded = true;
+            this.centerMap();
+        };
+        this.mapImage.src = 'assets/map.webp';
+    }
+
     centerMap() {
+        if (!this.mapLoaded) return;
         const scaleX = this.canvas.width / this.mapWidth;
         const scaleY = this.canvas.height / this.mapHeight;
-        this.viewport.zoom = Math.min(scaleX, scaleY) * 0.85;
+        this.viewport.zoom = Math.min(scaleX, scaleY) * 0.9;
         this.viewport.x = (this.canvas.width - this.mapWidth * this.viewport.zoom) / 2;
         this.viewport.y = (this.canvas.height - this.mapHeight * this.viewport.zoom) / 2;
         this.notifyViewportChange();
@@ -153,67 +180,28 @@ class MapEngine {
         const ctx = this.ctx;
         ctx.fillStyle = '#1a0d00';
         ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.renderTerrain();
-        this.renderGrid();
+
+        if (!this.mapLoaded) return;
+
+        // Draw map image
+        ctx.drawImage(
+            this.mapImage,
+            this.viewport.x, this.viewport.y,
+            this.mapWidth * this.viewport.zoom,
+            this.mapHeight * this.viewport.zoom
+        );
+
         this.renderMarkers();
-    }
-
-    renderTerrain() {
-        const ctx = this.ctx;
-        const vx = this.viewport.x, vy = this.viewport.y, vz = this.viewport.zoom;
-        const mw = this.mapWidth * vz, mh = this.mapHeight * vz;
-
-        ctx.strokeStyle = '#ff9f0a';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(vx, vy, mw, mh);
-
-        ctx.fillStyle = 'rgba(255, 159, 10, 0.03)';
-        ctx.fillRect(vx, vy, mw, mh);
-
-        // Draw Mojave terrain features
-        ctx.strokeStyle = 'rgba(255, 159, 10, 0.15)';
-        ctx.lineWidth = 1;
-
-        // Colorado River (east side)
-        ctx.beginPath();
-        ctx.moveTo(vx + mw * 0.85, vy);
-        ctx.quadraticCurveTo(vx + mw * 0.9, vy + mh * 0.5, vx + mw * 0.95, vy + mh);
-        ctx.stroke();
-
-        // Lake Mead
-        ctx.fillStyle = 'rgba(255, 159, 10, 0.1)';
-        ctx.beginPath();
-        ctx.ellipse(vx + mw * 0.85, vy + mh * 0.45, mw * 0.08, mh * 0.12, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Mountains
-        ctx.strokeStyle = 'rgba(255, 159, 10, 0.2)';
-        ctx.beginPath();
-        ctx.moveTo(vx, vy + mh * 0.1);
-        ctx.lineTo(vx + mw * 0.25, vy + mh * 0.15);
-        ctx.stroke();
-    }
-
-    renderGrid() {
-        const ctx = this.ctx;
-        const vx = this.viewport.x, vy = this.viewport.y, vz = this.viewport.zoom;
-        const mw = this.mapWidth * vz, mh = this.mapHeight * vz;
-        ctx.strokeStyle = 'rgba(255, 159, 10, 0.08)';
-        ctx.lineWidth = 1;
-        for (let i = 0; i <= 10; i++) {
-            ctx.beginPath(); ctx.moveTo(vx + (mw / 10) * i, vy); ctx.lineTo(vx + (mw / 10) * i, vy + mh); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(vx, vy + (mh / 10) * i); ctx.lineTo(vx + mw, vy + (mh / 10) * i); ctx.stroke();
-        }
     }
 
     renderMarkers() {
         const ctx = this.ctx;
-        const baseSize = 12;
+        const baseSize = 10;
         for (const marker of this.markers) {
             if (!this.visibleCategories.has(marker.category)) continue;
             const screenX = marker.x * this.mapWidth * this.viewport.zoom + this.viewport.x;
             const screenY = marker.y * this.mapHeight * this.viewport.zoom + this.viewport.y;
-            const size = baseSize * this.viewport.zoom;
+            const size = baseSize * Math.max(0.8, Math.min(1.5, this.viewport.zoom));
             if (screenX < -size || screenX > this.canvas.width + size || screenY < -size || screenY > this.canvas.height + size) continue;
 
             const isHovered = marker === this.hoveredMarker;
@@ -240,7 +228,7 @@ class MapEngine {
             ctx.fillStyle = '#3d2500';
             ctx.fill();
 
-            if (isHovered && this.viewport.zoom >= 0.8) this.renderLabel(screenX, screenY - size - 10, marker.name);
+            if (isHovered && this.viewport.zoom >= 0.5) this.renderLabel(screenX, screenY - size - 10, marker.name);
         }
     }
 

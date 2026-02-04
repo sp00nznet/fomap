@@ -1,27 +1,47 @@
-// Fallout 76 Map Engine - Canvas-based pan/zoom (Vault-Tec Blue Theme)
+// Fallout 76 Map Engine - Canvas-based with actual game map (Vault-Tec Blue Theme)
 
 class MapEngine {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
+
+        // Map image
+        this.mapImage = new Image();
+        this.mapLoaded = false;
         this.mapWidth = 900;
         this.mapHeight = 800;
-        this.viewport = { x: 0, y: 0, zoom: 1, minZoom: 0.5, maxZoom: 3 };
+
+        // Viewport state
+        this.viewport = { x: 0, y: 0, zoom: 1, minZoom: 0.3, maxZoom: 4 };
+
+        // Interaction state
         this.isDragging = false;
         this.lastMousePos = { x: 0, y: 0 };
         this.hoveredMarker = null;
         this.selectedMarker = null;
+
+        // Markers
         this.markers = [];
         this.visibleCategories = new Set();
+
+        // Callbacks
         this.onMarkerHover = null;
         this.onMarkerClick = null;
         this.onViewportChange = null;
+
+        // Touch support
         this.touches = [];
         this.lastPinchDistance = 0;
+
         this.init();
     }
 
-    init() { this.resizeCanvas(); this.setupEventListeners(); this.startRenderLoop(); }
+    init() {
+        this.resizeCanvas();
+        this.loadMapImage();
+        this.setupEventListeners();
+        this.startRenderLoop();
+    }
 
     resizeCanvas() {
         const container = this.canvas.parentElement;
@@ -30,10 +50,21 @@ class MapEngine {
         this.centerMap();
     }
 
+    loadMapImage() {
+        this.mapImage.onload = () => {
+            this.mapWidth = this.mapImage.width;
+            this.mapHeight = this.mapImage.height;
+            this.mapLoaded = true;
+            this.centerMap();
+        };
+        this.mapImage.src = 'assets/map.jpg';
+    }
+
     centerMap() {
+        if (!this.mapLoaded) return;
         const scaleX = this.canvas.width / this.mapWidth;
         const scaleY = this.canvas.height / this.mapHeight;
-        this.viewport.zoom = Math.min(scaleX, scaleY) * 0.85;
+        this.viewport.zoom = Math.min(scaleX, scaleY) * 0.9;
         this.viewport.x = (this.canvas.width - this.mapWidth * this.viewport.zoom) / 2;
         this.viewport.y = (this.canvas.height - this.mapHeight * this.viewport.zoom) / 2;
         this.notifyViewportChange();
@@ -105,72 +136,28 @@ class MapEngine {
         const ctx = this.ctx;
         ctx.fillStyle = '#000d1a';
         ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.renderTerrain();
-        this.renderRegions();
+
+        if (!this.mapLoaded) return;
+
+        // Draw map image
+        ctx.drawImage(
+            this.mapImage,
+            this.viewport.x, this.viewport.y,
+            this.mapWidth * this.viewport.zoom,
+            this.mapHeight * this.viewport.zoom
+        );
+
         this.renderMarkers();
-    }
-
-    renderTerrain() {
-        const ctx = this.ctx;
-        const vx = this.viewport.x, vy = this.viewport.y, vz = this.viewport.zoom;
-        const mw = this.mapWidth * vz, mh = this.mapHeight * vz;
-
-        ctx.strokeStyle = '#00aaff';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(vx, vy, mw, mh);
-
-        ctx.fillStyle = 'rgba(0, 170, 255, 0.02)';
-        ctx.fillRect(vx, vy, mw, mh);
-
-        // Appalachian mountains
-        ctx.strokeStyle = 'rgba(0, 170, 255, 0.15)';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(vx + mw * 0.4, vy);
-        ctx.lineTo(vx + mw * 0.6, vy + mh * 0.4);
-        ctx.lineTo(vx + mw * 0.5, vy + mh);
-        ctx.stroke();
-
-        // Ohio River (west)
-        ctx.strokeStyle = 'rgba(0, 170, 255, 0.2)';
-        ctx.beginPath();
-        ctx.moveTo(vx, vy + mh * 0.3);
-        ctx.quadraticCurveTo(vx + mw * 0.1, vy + mh * 0.5, vx, vy + mh * 0.7);
-        ctx.stroke();
-    }
-
-    renderRegions() {
-        const ctx = this.ctx;
-        const vx = this.viewport.x, vy = this.viewport.y, vz = this.viewport.zoom;
-        const mw = this.mapWidth * vz, mh = this.mapHeight * vz;
-
-        // Region dividers (simplified)
-        ctx.strokeStyle = 'rgba(0, 170, 255, 0.1)';
-        ctx.setLineDash([5, 5]);
-
-        // The Forest / Toxic Valley divider
-        ctx.beginPath();
-        ctx.moveTo(vx + mw * 0.35, vy);
-        ctx.lineTo(vx + mw * 0.35, vy + mh * 0.3);
-        ctx.stroke();
-
-        // Savage Divide
-        ctx.beginPath();
-        ctx.moveTo(vx + mw * 0.45, vy + mh * 0.15);
-        ctx.lineTo(vx + mw * 0.65, vy + mh * 0.6);
-        ctx.stroke();
-
-        ctx.setLineDash([]);
     }
 
     renderMarkers() {
         const ctx = this.ctx;
-        const baseSize = 12;
+        const baseSize = 10;
         for (const marker of this.markers) {
             if (!this.visibleCategories.has(marker.category)) continue;
             const sx = marker.x * this.mapWidth * this.viewport.zoom + this.viewport.x;
             const sy = marker.y * this.mapHeight * this.viewport.zoom + this.viewport.y;
-            const size = baseSize * this.viewport.zoom;
+            const size = baseSize * Math.max(0.8, Math.min(1.5, this.viewport.zoom));
             if (sx < -size || sx > this.canvas.width + size || sy < -size || sy > this.canvas.height + size) continue;
 
             const isHovered = marker === this.hoveredMarker, isSelected = marker === this.selectedMarker;
@@ -193,7 +180,7 @@ class MapEngine {
             ctx.fillStyle = '#002233';
             ctx.fill();
 
-            if (isHovered && this.viewport.zoom >= 0.8) this.renderLabel(sx, sy - size - 10, marker.name);
+            if (isHovered && this.viewport.zoom >= 0.5) this.renderLabel(sx, sy - size - 10, marker.name);
         }
     }
 
