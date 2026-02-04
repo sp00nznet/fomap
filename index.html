@@ -3,103 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fallout 3 Interactive Map</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Fallout Interactive Maps Collection</title>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background: #0a0a0a;
+            color: #14fe17;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(20, 254, 23, 0.5);
+        }
+
+        .subtitle {
+            color: #0a8f0c;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .game-card {
+            background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        /* Game-specific colors */
+        .fo1 { border-color: #ffb000; }
+        .fo1::before { background: #ffb000; }
+        .fo1:hover { border-color: #ffb000; box-shadow: 0 10px 30px rgba(255, 176, 0, 0.2); }
+        .fo1 .game-title { color: #ffb000; }
+
+        .fo2 { border-color: #ffb000; }
+        .fo2::before { background: #ffb000; }
+        .fo2:hover { border-color: #ffb000; box-shadow: 0 10px 30px rgba(255, 176, 0, 0.2); }
+        .fo2 .game-title { color: #ffb000; }
+
+        .fo3 { border-color: #14fe17; }
+        .fo3::before { background: #14fe17; }
+        .fo3:hover { border-color: #14fe17; box-shadow: 0 10px 30px rgba(20, 254, 23, 0.2); }
+        .fo3 .game-title { color: #14fe17; }
+
+        .fonv { border-color: #ff9f0a; }
+        .fonv::before { background: #ff9f0a; }
+        .fonv:hover { border-color: #ff9f0a; box-shadow: 0 10px 30px rgba(255, 159, 10, 0.2); }
+        .fonv .game-title { color: #ff9f0a; }
+
+        .fo4 { border-color: #00ff99; }
+        .fo4::before { background: #00ff99; }
+        .fo4:hover { border-color: #00ff99; box-shadow: 0 10px 30px rgba(0, 255, 153, 0.2); }
+        .fo4 .game-title { color: #00ff99; }
+
+        .fo76 { border-color: #00aaff; }
+        .fo76::before { background: #00aaff; }
+        .fo76:hover { border-color: #00aaff; box-shadow: 0 10px 30px rgba(0, 170, 255, 0.2); }
+        .fo76 .game-title { color: #00aaff; }
+
+        .game-title {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .game-year {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .game-region {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .game-locations {
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        footer {
+            margin-top: 60px;
+            color: #444;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer em {
+            color: #14fe17;
+        }
+    </style>
 </head>
 <body>
-    <div class="pip-boy-frame">
-        <!-- Header / Search Bar -->
-        <header class="header">
-            <div class="header-left">
-                <h1 class="title">CAPITAL WASTELAND</h1>
-            </div>
-            <div class="header-center">
-                <div class="search-container">
-                    <input type="text" id="search-input" placeholder="Search locations..." autocomplete="off">
-                    <div id="search-results" class="search-results"></div>
-                </div>
-            </div>
-            <div class="header-right">
-                <button id="metro-btn" class="pip-btn">DC METRO</button>
-                <button id="reset-view-btn" class="pip-btn">RESET VIEW</button>
-            </div>
-        </header>
+    <h1>FALLOUT INTERACTIVE MAPS</h1>
+    <p class="subtitle">Select a game to explore the wasteland</p>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Left Sidebar - Toggle Categories -->
-            <aside class="sidebar sidebar-left">
-                <div class="sidebar-header">
-                    <h2>LOCATIONS</h2>
-                    <div class="sidebar-controls">
-                        <button id="show-all-btn" class="pip-btn-sm">Show All</button>
-                        <button id="hide-all-btn" class="pip-btn-sm">Hide All</button>
-                    </div>
-                </div>
-                <div class="toggle-list" id="category-toggles">
-                    <!-- Categories will be populated by JS -->
-                </div>
+    <div class="games-grid">
+        <a href="fallout1/" class="game-card fo1">
+            <div class="game-title">FALLOUT</div>
+            <div class="game-year">2161</div>
+            <div class="game-region">Southern California</div>
+            <div class="game-locations">25+ Locations</div>
+        </a>
 
-                <div class="sidebar-header">
-                    <h2>COLLECTIBLES</h2>
-                </div>
-                <div class="toggle-list" id="collectible-toggles">
-                    <!-- Collectibles will be populated by JS -->
-                </div>
-            </aside>
+        <a href="fallout2/" class="game-card fo2">
+            <div class="game-title">FALLOUT 2</div>
+            <div class="game-year">2241</div>
+            <div class="game-region">New California</div>
+            <div class="game-locations">40+ Locations</div>
+        </a>
 
-            <!-- Map Container -->
-            <main class="map-container">
-                <canvas id="map-canvas"></canvas>
-                <div id="cursor-tooltip" class="cursor-tooltip"></div>
-            </main>
+        <a href="fallout3/" class="game-card fo3">
+            <div class="game-title">FALLOUT 3</div>
+            <div class="game-year">2277</div>
+            <div class="game-region">Capital Wasteland</div>
+            <div class="game-locations">130+ Locations</div>
+        </a>
 
-            <!-- Right Sidebar - Location Info -->
-            <aside class="sidebar sidebar-right" id="info-panel">
-                <div class="info-placeholder">
-                    <p>Click a location marker to view details</p>
-                </div>
-                <div class="info-content" id="info-content" style="display: none;">
-                    <h2 id="info-name"></h2>
-                    <div class="info-category" id="info-category"></div>
-                    <div class="info-image-container">
-                        <img id="info-image" src="" alt="">
-                    </div>
-                    <p class="info-description" id="info-description"></p>
-                    <div class="info-coords" id="info-coords"></div>
-                </div>
-            </aside>
-        </div>
+        <a href="newvegas/" class="game-card fonv">
+            <div class="game-title">FALLOUT: NEW VEGAS</div>
+            <div class="game-year">2281</div>
+            <div class="game-region">Mojave Wasteland</div>
+            <div class="game-locations">80+ Locations</div>
+        </a>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <span class="footer-text">VAULT-TEC CARTOGRAPHY DIVISION</span>
-            <span class="footer-text" id="zoom-level">Zoom: 100%</span>
-            <span class="footer-text" id="coords-display">X: 0 Y: 0</span>
-        </footer>
+        <a href="fallout4/" class="game-card fo4">
+            <div class="game-title">FALLOUT 4</div>
+            <div class="game-year">2287</div>
+            <div class="game-region">The Commonwealth</div>
+            <div class="game-locations">80+ Locations</div>
+        </a>
+
+        <a href="fallout76/" class="game-card fo76">
+            <div class="game-title">FALLOUT 76</div>
+            <div class="game-year">2102</div>
+            <div class="game-region">Appalachia</div>
+            <div class="game-locations">85+ Locations</div>
+        </a>
     </div>
 
-    <!-- DC Metro Modal -->
-    <div id="metro-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>DC METRO SYSTEM</h2>
-                <button id="metro-close" class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <img src="assets/img_0555.jpg" alt="DC Metro Map" class="metro-map-img">
-            </div>
-        </div>
-    </div>
-
-    <!-- Scanline Overlay -->
-    <div class="scanline-overlay"></div>
-
-    <script src="js/locations.js"></script>
-    <script src="js/map.js"></script>
-    <script src="js/app.js"></script>
+    <footer>
+        <em>War. War never changes.</em>
+    </footer>
 </body>
 </html>

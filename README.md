@@ -14,7 +14,7 @@ Modern HTML5 interactive maps for the Fallout game series, converted from Flash 
 |------|------|--------|-------|-----------|
 | [**Fallout 1**](fallout1/) | 2161 | Southern California | Amber CRT | 25+ |
 | [**Fallout 2**](fallout2/) | 2241 | New California | Amber CRT | 40+ |
-| [**Fallout 3**](index.html) | 2277 | Capital Wasteland | Pip-Boy Green | 130+ |
+| [**Fallout 3**](fallout3/) | 2277 | Capital Wasteland | Pip-Boy Green | 130+ |
 | [**Fallout: New Vegas**](newvegas/) | 2281 | Mojave Wasteland | Desert Amber | 80+ |
 | [**Fallout 4**](fallout4/) | 2287 | The Commonwealth | Pip-Boy Cyan | 80+ |
 | [**Fallout 76**](fallout76/) | 2102 | Appalachia | Vault-Tec Blue | 85+ |
@@ -77,9 +77,10 @@ Each map features a unique color scheme inspired by the game:
    ```
 
 2. Open any `index.html` file in a modern web browser:
-   - `index.html` - Fallout 3 (main)
+   - `index.html` - Hub page (game selector)
    - `fallout1/index.html` - Fallout 1
    - `fallout2/index.html` - Fallout 2
+   - `fallout3/index.html` - Fallout 3
    - `newvegas/index.html` - Fallout: New Vegas
    - `fallout4/index.html` - Fallout 4
    - `fallout76/index.html` - Fallout 76
@@ -104,35 +105,43 @@ Each map features a unique color scheme inspired by the game:
 
 ```
 fomap/
-├── index.html              # Fallout 3 main map
-├── css/style.css           # Fallout 3 styles
-├── js/                     # Fallout 3 scripts
-├── assets/                 # Fallout 3 images
+├── index.html              # Hub page (game selector)
 │
 ├── fallout1/               # Fallout 1 map
 │   ├── index.html
 │   ├── css/style.css
-│   └── js/
+│   ├── js/
+│   └── assets/
 │
 ├── fallout2/               # Fallout 2 map
 │   ├── index.html
 │   ├── css/style.css
-│   └── js/
+│   ├── js/
+│   └── assets/
+│
+├── fallout3/               # Fallout 3 map
+│   ├── index.html
+│   ├── css/style.css
+│   ├── js/
+│   └── assets/
 │
 ├── newvegas/               # Fallout: New Vegas map
 │   ├── index.html
 │   ├── css/style.css
-│   └── js/
+│   ├── js/
+│   └── assets/
 │
 ├── fallout4/               # Fallout 4 map
 │   ├── index.html
 │   ├── css/style.css
-│   └── js/
+│   ├── js/
+│   └── assets/
 │
 └── fallout76/              # Fallout 76 map
     ├── index.html
     ├── css/style.css
-    └── js/
+    ├── js/
+    └── assets/
 ```
 
 ---
