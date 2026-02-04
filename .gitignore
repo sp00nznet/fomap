@@ -1,0 +1,9 @@
+# Original Flash files
+fallout3.swf
+fallout3_decompressed.bin
+
+# Extracted assets (duplicated in /assets)
+extracted_assets/
+
+# Claude Code config
+.claude/
