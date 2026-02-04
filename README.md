@@ -1,56 +1,71 @@
-# Fallout 3 Interactive Map
+# Fallout Interactive Maps Collection
 
-A modern HTML5 web application for exploring the Capital Wasteland, converted from the original Flash-based interactive map.
+Modern HTML5 interactive maps for the Fallout game series, converted from Flash and enhanced with game-specific themes.
 
-![Pip-Boy Theme](https://img.shields.io/badge/Theme-Pip--Boy%203000-14fe17?style=flat-square)
+![Pip-Boy Theme](https://img.shields.io/badge/Theme-Pip--Boy-14fe17?style=flat-square)
 ![Vanilla JS](https://img.shields.io/badge/JavaScript-Vanilla-f7df1e?style=flat-square)
 ![No Dependencies](https://img.shields.io/badge/Dependencies-None-success?style=flat-square)
 
 ---
 
-## Features
+## Available Maps
 
-### Interactive Map
-- **Pan & Zoom** - Click and drag to pan, scroll wheel to zoom
-- **Touch Support** - Pinch-to-zoom and touch drag for mobile devices
-- **Smooth Animations** - Canvas-based rendering with 60fps performance
-
-### 130+ Locations
-Organized into 14 categories:
-- Vaults (101, 106, 108, 87, 92, 112, Vault-Tec HQ)
-- Metro Stations
-- Settlements (Megaton, Rivet City, Tenpenny Tower, etc.)
-- Caves & Natural Landmarks
-- Cities & Urban Ruins
-- Factories & Industrial
-- Military Installations
-- Monuments & Landmarks
-- Sewers
-- Towns
-- Doors/Entrances
-- Unmarked Locations
-
-### Collectibles Tracking
-- **S.P.E.C.I.A.L. Bobbleheads** (7 total)
-- **Skills Bobbleheads** (13 total)
-- **Skill Books** (Multiple categories)
-
-### User Interface
-- **Category Toggles** - Show/hide location types
-- **Search** - Find locations by name with autocomplete
-- **Location Details** - View descriptions and images
-- **DC Metro Map** - Popup overlay of the metro system
-- **Persistent Preferences** - Settings saved to localStorage
+| Game | Year | Region | Theme | Locations |
+|------|------|--------|-------|-----------|
+| [**Fallout 1**](fallout1/) | 2161 | Southern California | Amber CRT | 25+ |
+| [**Fallout 2**](fallout2/) | 2241 | New California | Amber CRT | 40+ |
+| [**Fallout 3**](index.html) | 2277 | Capital Wasteland | Pip-Boy Green | 130+ |
+| [**Fallout: New Vegas**](newvegas/) | 2281 | Mojave Wasteland | Desert Amber | 80+ |
+| [**Fallout 4**](fallout4/) | 2287 | The Commonwealth | Pip-Boy Cyan | 80+ |
+| [**Fallout 76**](fallout76/) | 2102 | Appalachia | Vault-Tec Blue | 85+ |
 
 ---
 
-## Screenshots
+## Features
 
-The map features a full Pip-Boy 3000 terminal aesthetic:
-- Green phosphor display (`#14fe17`)
-- CRT scanline overlay
-- Monospace terminal font
-- Glowing UI elements
+### All Maps Include:
+- **Pan & Zoom** - Click and drag to pan, scroll wheel to zoom
+- **Touch Support** - Pinch-to-zoom and touch drag for mobile
+- **Category Toggles** - Show/hide location types
+- **Search** - Find locations by name with autocomplete
+- **Location Details** - View descriptions for each location
+- **Persistent Preferences** - Settings saved to localStorage
+
+### Game-Specific Features:
+
+**Fallout 3:**
+- 20 Bobbleheads (S.P.E.C.I.A.L. + Skills)
+- DC Metro system popup
+- Full location images
+
+**Fallout: New Vegas:**
+- 7 Snow Globes + 4 DLC Snow Globes
+- Faction territories
+- NCR vs Legion locations
+
+**Fallout 4:**
+- 20 Bobbleheads (S.P.E.C.I.A.L. + Skills)
+- Settlement locations
+- Faction headquarters
+
+**Fallout 76:**
+- 7 Region categories
+- Workshop locations
+- Vault locations
+
+---
+
+## Visual Themes
+
+Each map features a unique color scheme inspired by the game:
+
+| Game | Primary Color | Style |
+|------|---------------|-------|
+| Fallout 1 & 2 | `#ffb000` (Amber) | Classic CRT terminal |
+| Fallout 3 | `#14fe17` (Green) | Pip-Boy 3000 |
+| New Vegas | `#ff9f0a` (Orange) | Desert Pip-Boy |
+| Fallout 4 | `#00ff99` (Cyan) | Pip-Boy 3000 Mk IV |
+| Fallout 76 | `#00aaff` (Blue) | Vault-Tec corporate |
 
 ---
 
@@ -61,9 +76,13 @@ The map features a full Pip-Boy 3000 terminal aesthetic:
    git clone https://github.com/sp00nznet/fomap.git
    ```
 
-2. Open `index.html` in any modern web browser
-
-3. Start exploring the Capital Wasteland!
+2. Open any `index.html` file in a modern web browser:
+   - `index.html` - Fallout 3 (main)
+   - `fallout1/index.html` - Fallout 1
+   - `fallout2/index.html` - Fallout 2
+   - `newvegas/index.html` - Fallout: New Vegas
+   - `fallout4/index.html` - Fallout 4
+   - `fallout76/index.html` - Fallout 76
 
 > **Note:** No build process or server required - pure HTML/CSS/JS
 
@@ -85,42 +104,50 @@ The map features a full Pip-Boy 3000 terminal aesthetic:
 
 ```
 fomap/
-├── index.html          # Main HTML structure
-├── css/
-│   └── style.css       # Pip-Boy themed styling
-├── js/
-│   ├── app.js          # Main application logic
-│   ├── map.js          # Canvas map engine (pan/zoom)
-│   └── locations.js    # Location database (130+ entries)
-└── assets/
-    ├── img_1499.jpg    # Main world map (658x663)
-    ├── img_0555.jpg    # DC Metro system map
-    ├── img_*.jpg       # Location detail images
-    └── icon_*.jpg      # Map marker icons
+├── index.html              # Fallout 3 main map
+├── css/style.css           # Fallout 3 styles
+├── js/                     # Fallout 3 scripts
+├── assets/                 # Fallout 3 images
+│
+├── fallout1/               # Fallout 1 map
+│   ├── index.html
+│   ├── css/style.css
+│   └── js/
+│
+├── fallout2/               # Fallout 2 map
+│   ├── index.html
+│   ├── css/style.css
+│   └── js/
+│
+├── newvegas/               # Fallout: New Vegas map
+│   ├── index.html
+│   ├── css/style.css
+│   └── js/
+│
+├── fallout4/               # Fallout 4 map
+│   ├── index.html
+│   ├── css/style.css
+│   └── js/
+│
+└── fallout76/              # Fallout 76 map
+    ├── index.html
+    ├── css/style.css
+    └── js/
 ```
 
 ---
 
-## Technical Details
+## Location Data
 
-### Map Engine (`map.js`)
-- Canvas-based rendering for smooth performance
-- Viewport tracking with pan offset and zoom level
-- Mouse and touch event handling
-- Marker hit detection via distance calculation
-- Animated transitions for pan-to-location
+Each game includes comprehensive location databases:
 
-### Location Data (`locations.js`)
-- Relative coordinates (0-1 range) for responsive positioning
-- Category system for filtering
-- Full descriptions and image references
-- Collectibles with detailed location info
-
-### Styling (`style.css`)
-- CSS custom properties for theme colors
-- Flexbox/Grid layout system
-- Responsive breakpoints for mobile
-- CRT scanline effect via repeating gradient
+- **Major settlements and towns**
+- **Vaults**
+- **Faction headquarters**
+- **Military installations**
+- **Caves and dungeons**
+- **Landmarks and points of interest**
+- **Collectibles** (where applicable)
 
 ---
 
@@ -135,14 +162,14 @@ fomap/
 
 ## Credits
 
-- **Original Map Data** - Bethesda Softworks / Fallout 3
-- **Flash to HTML5 Conversion** - Claude Code
+- **Game Data** - Bethesda Softworks / Obsidian Entertainment
+- **Development** - Claude Code
 
 ---
 
 ## License
 
-This project is a fan-made tool for the Fallout 3 community. Fallout is a registered trademark of Bethesda Softworks LLC.
+This project is a fan-made tool for the Fallout community. Fallout is a registered trademark of Bethesda Softworks LLC.
 
 ---
 
