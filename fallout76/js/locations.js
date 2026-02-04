@@ -1,5 +1,6 @@
 // Fallout 76 Location Database - Appalachia 2102
 // Coordinates calibrated to actual game map
+// Expanded with 120+ locations based on map markers
 // Regions: Forest (SW), Toxic Valley (N), Ash Heap (S), Savage Divide (Center), Mire (NE), Cranberry Bog (SE)
 
 const CATEGORIES = {
@@ -17,7 +18,7 @@ const CATEGORIES = {
 // The map has Forest in bottom-left, Toxic Valley at top, Mire in top-right,
 // Cranberry Bog in bottom-right, Ash Heap at bottom-center, Savage Divide in middle
 const locations = [
-    // === THE FOREST (Southwest - green area) ===
+    // === THE FOREST (Southwest - green area, LVL 1-10) ===
     { id: 1, name: 'Vault 76', category: 'vaults', x: 0.28, y: 0.32,
       description: 'Your vault and starting location. "Reclamation Day" - October 23, 2102. You emerge 25 years after the bombs fell to rebuild America.' },
     { id: 2, name: 'Flatwoods', category: 'forest', x: 0.25, y: 0.42,
@@ -32,8 +33,30 @@ const locations = [
       description: 'Swiss-German community. The Fasnacht Day event happens here. Robots still run the parade.' },
     { id: 80, name: 'Arktos Pharma', category: 'forest', x: 0.38, y: 0.38,
       description: 'Pharmaceutical company. Project Paradise event location. Mutated animals inside.' },
+    { id: 'sutton', name: 'Sutton', category: 'forest', x: 0.30, y: 0.35,
+      description: 'Small town in the Forest. Has a train station and Red Rocket.' },
+    { id: 'wixon', name: 'Wixon Homestead', category: 'forest', x: 0.22, y: 0.38,
+      description: 'Farm in the Forest. Good starting area resources.' },
+    { id: 'aaronholt', name: 'Aaronholt Homestead', category: 'forest', x: 0.18, y: 0.35,
+      description: 'Farm on the western edge of the Forest.' },
+    { id: 'silva', name: 'Silva Homestead', category: 'forest', x: 0.20, y: 0.45,
+      description: 'Farmstead south of Vault 76.' },
+    { id: 'vault_tec_u', name: 'Vault-Tec University', category: 'forest', x: 0.33, y: 0.24,
+      description: 'Where Vault-Tec trained its overseers. Contains lore about vault experiments.' },
+    { id: 'mama_dolce', name: 'Mama Dolce\'s Food Processing', category: 'forest', x: 0.30, y: 0.28,
+      description: 'Chinese spy operation disguised as a food factory. Event location.' },
+    { id: 'tyler_county', name: 'Tyler County Fairgrounds', category: 'forest', x: 0.18, y: 0.42,
+      description: 'Pre-war fairgrounds. Now infested with creatures.' },
+    { id: 'landview', name: 'Landview Lighthouse', category: 'forest', x: 0.08, y: 0.48,
+      description: 'Lighthouse on the western coast.' },
+    { id: 'summersville', name: 'Summersville', category: 'forest', x: 0.25, y: 0.55,
+      description: 'Town near Charleston. Part of the Responders questline.' },
+    { id: 'charleston_station', name: 'Charleston Station', category: 'forest', x: 0.30, y: 0.55,
+      description: 'Train station near the Capitol. Player vending location.' },
+    { id: 'gauley_mine', name: 'Gauley Mine', category: 'forest', x: 0.22, y: 0.50,
+      description: 'Mine in the Forest region. Mole miners inside.' },
 
-    // === TOXIC VALLEY (North - yellowish/green area) ===
+    // === TOXIC VALLEY (North - yellowish/green area, LVL 10+) ===
     { id: 5, name: 'Grafton', category: 'toxic', x: 0.38, y: 0.15,
       description: 'Industrial town in the Toxic Valley. Home to the Grafton Monster, a horrifying cryptid. Grafton Steel dominates.' },
     { id: 10, name: 'Wavy Willard\'s Water Park', category: 'toxic', x: 0.35, y: 0.08,
@@ -44,8 +67,22 @@ const locations = [
       description: 'Pre-war prison now overrun by super mutants. High-level enemies and good loot.' },
     { id: 83, name: 'Crater', category: 'toxic', x: 0.45, y: 0.10,
       description: 'Raider faction headquarters. Meg leads the raiders. Built in a crashed space station.' },
+    { id: 'kiddie_corner', name: 'Kiddie Corner Cabins', category: 'toxic', x: 0.32, y: 0.12,
+      description: 'Children\'s camp in the Toxic Valley. Now overrun.' },
+    { id: 'becker_farm', name: 'Becker Farm', category: 'toxic', x: 0.40, y: 0.18,
+      description: 'Farm in the Toxic Valley. Workshop location nearby.' },
+    { id: 'dry_creek', name: 'Dry Creek Shelter', category: 'toxic', x: 0.38, y: 0.05,
+      description: 'Shelter in the northern Toxic Valley.' },
+    { id: 'pioneer', name: 'Pioneer Scout Camp', category: 'toxic', x: 0.55, y: 0.05,
+      description: 'Scout camp with badge challenges. Tadpole and Possum ranks available.' },
+    { id: 'ohio_river', name: 'Ohio River Adventures', category: 'toxic', x: 0.28, y: 0.10,
+      description: 'River recreation area turned survival camp.' },
+    { id: 'crashed_station', name: 'Crashed Space Station', category: 'toxic', x: 0.44, y: 0.08,
+      description: 'Part of Crater. Raiders built their home in the wreckage.' },
+    { id: 'willaker', name: 'Willaker Farm', category: 'toxic', x: 0.50, y: 0.12,
+      description: 'Farm in the Toxic Valley region.' },
 
-    // === ASH HEAP (South - dark gray area) ===
+    // === ASH HEAP (South - dark gray area, LVL 25+) ===
     { id: 20, name: 'Mount Blair', category: 'ash', x: 0.15, y: 0.78,
       description: 'Massive mining excavator in the Ash Heap. The largest machine in the game. Activating it triggers events.' },
     { id: 21, name: 'Welch', category: 'ash', x: 0.22, y: 0.82,
@@ -58,8 +95,22 @@ const locations = [
       description: 'Corporate headquarters for Garrahan Mining. Contains the Excavator Power Armor plans.' },
     { id: 85, name: 'The Rusty Pick', category: 'ash', x: 0.22, y: 0.78,
       description: 'Mole miner trading post. Purveyor Murmrgh sells legendary items for scrip.' },
+    { id: 'sal_grinder', name: 'Sal\'s Grinders', category: 'ash', x: 0.20, y: 0.75,
+      description: 'Restaurant in the Ash Heap. Food supplies.' },
+    { id: 'hornwright_estate', name: 'Hornwright Estate', category: 'ash', x: 0.32, y: 0.68,
+      description: 'Mansion of the Hornwright family. Key to the Excavator questline.' },
+    { id: 'hornwright_hq', name: 'Hornwright Industrial HQ', category: 'ash', x: 0.35, y: 0.65,
+      description: 'Corporate offices of Hornwright Industries. Mining automation technology.' },
+    { id: 'camden_park', name: 'Camden Park', category: 'ash', x: 0.10, y: 0.82,
+      description: 'Pre-war amusement park. Daily and weekly challenges available.' },
+    { id: 'belching_betty', name: 'Belching Betty', category: 'ash', x: 0.12, y: 0.75,
+      description: 'Mine shaft with mole miners. Part of the Fire Breathers questline.' },
+    { id: 'brim_quarry', name: 'Brim Quarry', category: 'ash', x: 0.15, y: 0.70,
+      description: 'Quarry in the Ash Heap. Resource extraction.' },
+    { id: 'striker_row', name: 'Striker Row', category: 'ash', x: 0.20, y: 0.68,
+      description: 'Mining worker housing. Evidence of the automation riots.' },
 
-    // === SAVAGE DIVIDE (Central - brown mountainous area) ===
+    // === SAVAGE DIVIDE (Central - brown mountainous area, LVL 15-30) ===
     { id: 30, name: 'Top of the World', category: 'savage', x: 0.52, y: 0.38,
       description: 'Ski resort controlled by Rose, a raider robot. She\'ll help you track down the Scorched killers.' },
     { id: 31, name: 'The Whitespring Resort', category: 'savage', x: 0.55, y: 0.52,
@@ -78,8 +129,28 @@ const locations = [
       description: 'Settler faction headquarters. Paige leads the peaceful settlers.' },
     { id: 84, name: 'Fort Atlas', category: 'savage', x: 0.55, y: 0.50,
       description: 'Brotherhood of Steel new headquarters. Paladin Rahmani and Knight Shin lead.' },
+    { id: 'sunnytop', name: 'Sunnytop Ski Lanes', category: 'savage', x: 0.55, y: 0.35,
+      description: 'Ski resort in the Savage Divide. Scorched enemies.' },
+    { id: 'solomon_pond', name: 'Solomon\'s Pond', category: 'savage', x: 0.48, y: 0.35,
+      description: 'Pond area in the Divide. Fishing spot.' },
+    { id: 'r_g_station', name: 'R&G Station', category: 'savage', x: 0.45, y: 0.45,
+      description: 'Train station in the mountains. Player vending.' },
+    { id: 'spruce_knob', name: 'Spruce Knob', category: 'savage', x: 0.62, y: 0.38,
+      description: 'Highest point in West Virginia. Raider lookout.' },
+    { id: 'palace_winding', name: 'Palace of the Winding Path', category: 'savage', x: 0.60, y: 0.55,
+      description: 'Cult compound. Mysterious Order of Mysteries questline.' },
+    { id: 'sugar_grove', name: 'Sugar Grove', category: 'savage', x: 0.68, y: 0.45,
+      description: 'Pre-war NSA listening post. Brotherhood quest location.' },
+    { id: 'west_tek', name: 'West Tek Research Center', category: 'savage', x: 0.58, y: 0.42,
+      description: 'FEV research facility. Super mutant origin point. High-level location.' },
+    { id: 'lucky_hole', name: 'Lucky Hole Mine', category: 'savage', x: 0.50, y: 0.60,
+      description: 'Cult mine with lead deposits. Mysterious altar inside.' },
+    { id: 'new_gad', name: 'New Gad', category: 'savage', x: 0.45, y: 0.52,
+      description: 'Ruined settlement in the Divide.' },
+    { id: 'central_station', name: 'Central Mountain Lookout', category: 'savage', x: 0.52, y: 0.42,
+      description: 'Fire lookout tower. Good views of the region.' },
 
-    // === THE MIRE (Northeast - dark green swampy area) ===
+    // === THE MIRE (Northeast - dark green swampy area, LVL 30+) ===
     { id: 40, name: 'Harper\'s Ferry', category: 'mire', x: 0.78, y: 0.32,
       description: 'Historic town, last stand of the Free States. Learn about their fight against government overreach.' },
     { id: 41, name: 'Dyer Chemical', category: 'mire', x: 0.75, y: 0.40,
@@ -92,8 +163,22 @@ const locations = [
       description: 'Brotherhood of Steel forward camp. They came to fight the Scorched and failed.' },
     { id: 45, name: 'Abbie\'s Bunker', category: 'mire', x: 0.78, y: 0.38,
       description: 'Free States bunker with crucial information about fighting the Scorched.' },
+    { id: 'sunday_brothers', name: 'Sunday Brothers\' Cabin', category: 'mire', x: 0.72, y: 0.35,
+      description: 'Cabin in the Mire. Clues about the Free States.' },
+    { id: 'big_b', name: 'Big B\'s Rest Stop', category: 'mire', x: 0.80, y: 0.35,
+      description: 'Rest stop in the Mire. Random encounter location.' },
+    { id: 'haven_church', name: 'Haven Church', category: 'mire', x: 0.75, y: 0.48,
+      description: 'Church in the swamp. Cult activity suspected.' },
+    { id: 'dolly_sods', name: 'Dolly Sods Wilderness', category: 'mire', x: 0.70, y: 0.30,
+      description: 'Wilderness area between Savage Divide and the Mire.' },
+    { id: 'berkeley', name: 'Berkeley Springs', category: 'mire', x: 0.85, y: 0.28,
+      description: 'Pre-war spa town. Now dangerous but has resources.' },
+    { id: 'raleigh_clay', name: 'Raleigh Clay\'s Bunker', category: 'mire', x: 0.88, y: 0.42,
+      description: 'Free States leader\'s bunker. Questline location.' },
+    { id: 'crevasse_dam', name: 'Crevasse Dam', category: 'mire', x: 0.82, y: 0.48,
+      description: 'Dam in the Mire. Controls water flow.' },
 
-    // === CRANBERRY BOG (Southeast - reddish wasteland) ===
+    // === CRANBERRY BOG (Southeast - reddish wasteland, LVL 40+) ===
     { id: 50, name: 'Watoga', category: 'bog', x: 0.75, y: 0.72,
       description: 'The "City of the Future" - fully automated. Robots went haywire. High-level area with great loot.' },
     { id: 51, name: 'Fissure Site Prime', category: 'bog', x: 0.70, y: 0.78,
@@ -106,6 +191,24 @@ const locations = [
       description: 'Supply drop location in the Bog. High-level enemies patrol.' },
     { id: 55, name: 'Site Charlie', category: 'bog', x: 0.82, y: 0.70,
       description: 'Another nuclear missile silo. Requires code pieces to launch.' },
+    { id: 'forward_station', name: 'Forward Station Delta', category: 'bog', x: 0.78, y: 0.75,
+      description: 'Military forward base. Brotherhood holdout.' },
+    { id: 'robco', name: 'RobCo Research Center', category: 'bog', x: 0.72, y: 0.68,
+      description: 'Robot research facility. High-level robots.' },
+    { id: 'watoga_station', name: 'Watoga Station', category: 'bog', x: 0.76, y: 0.70,
+      description: 'Train station in Watoga. Player vending.' },
+    { id: 'watoga_civic', name: 'Watoga Civic Center', category: 'bog', x: 0.74, y: 0.72,
+      description: 'Municipal building in Watoga. Mayoral questline.' },
+    { id: 'watoga_high', name: 'Watoga High School', category: 'bog', x: 0.77, y: 0.73,
+      description: 'School in Watoga. Graduation ceremony quest.' },
+    { id: 'bog_town', name: 'Bog Town', category: 'bog', x: 0.65, y: 0.70,
+      description: 'Small settlement in the Bog. Very dangerous.' },
+    { id: 'sunrise', name: 'Sunrise Field', category: 'bog', x: 0.70, y: 0.65,
+      description: 'Farm in the Cranberry Bog. Mutated crops.' },
+    { id: 'ams_hq', name: 'AMS Headquarters', category: 'bog', x: 0.68, y: 0.72,
+      description: 'Atomic Mining Services HQ. Excavator armor research.' },
+    { id: 'pylon', name: 'Pylon V-13', category: 'bog', x: 0.65, y: 0.75,
+      description: 'Power pylon in the Bog. Radiation hazard.' },
 
     // === VAULTS ===
     { id: 60, name: 'Vault 63', category: 'vaults', x: 0.30, y: 0.68,
@@ -137,7 +240,17 @@ const locations = [
     { id: 77, name: 'Thunder Mountain Power Plant', category: 'workshop', x: 0.75, y: 0.52,
       description: 'Power plant in the Mire. Dangerous area but valuable.' },
     { id: 78, name: 'Wade Airport', category: 'workshop', x: 0.55, y: 0.42,
-      description: 'Airport workshop. Decent central location.' }
+      description: 'Airport workshop. Decent central location.' },
+    { id: 'lakeside', name: 'Lakeside Cabins', category: 'workshop', x: 0.40, y: 0.28,
+      description: 'Workshop near a lake in the Forest region.' },
+    { id: 'gorge', name: 'Gorge Junkyard', category: 'workshop', x: 0.35, y: 0.30,
+      description: 'Junkyard workshop in the Forest. Good for scrapping.' },
+    { id: 'billings', name: 'Billings Homestead', category: 'workshop', x: 0.40, y: 0.50,
+      description: 'Farm workshop between Forest and Savage Divide.' },
+    { id: 'berkeley_ws', name: 'Berkeley Springs West', category: 'workshop', x: 0.82, y: 0.25,
+      description: 'Workshop near Berkeley Springs in the Mire.' },
+    { id: 'dabney', name: 'Dabney Homestead', category: 'workshop', x: 0.68, y: 0.58,
+      description: 'Farm workshop on the edge of the Bog.' }
 ];
 
 if (typeof module !== 'undefined' && module.exports) {

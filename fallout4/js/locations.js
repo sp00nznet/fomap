@@ -1,5 +1,6 @@
 // Fallout 4 Location Database - The Commonwealth 2287
 // Coordinates calibrated to actual game map
+// Expanded with 80+ locations based on map markers
 
 const CATEGORIES = {
     settlements: { name: 'Settlements', color: '#00ff99' },
@@ -26,6 +27,28 @@ const locations = [
       description: 'Your vault. Cryogenic preservation experiment. You\'ve been frozen for 210 years. Your spouse was murdered and Shaun kidnapped.' },
     { id: 60, name: 'Museum of Freedom', category: 'landmarks', x: 0.22, y: 0.15,
       description: 'Where you meet Preston Garvey and the Minutemen. Your first power armor and minigun are here.' },
+    { id: 'red_rocket', name: 'Red Rocket Truck Stop', category: 'settlements', x: 0.20, y: 0.12,
+      description: 'Gas station near Sanctuary. Dogmeat waits here. Can be developed as a settlement.' },
+    { id: 'abernathy', name: 'Abernathy Farm', category: 'settlements', x: 0.15, y: 0.18,
+      description: 'Farm settlement run by the Abernathy family. They have a quest involving their daughter\'s locket.' },
+    { id: 'drumlin', name: 'Drumlin Diner', category: 'landmarks', x: 0.25, y: 0.22,
+      description: 'Diner with Trudy and Wolfgang. Can resolve their conflict peacefully or violently.' },
+    { id: 'starlight', name: 'Starlight Drive-In', category: 'settlements', x: 0.28, y: 0.25,
+      description: 'Abandoned drive-in theater. Large flat area perfect for building. Has a radioactive pool to clean up.' },
+    { id: 'concord', name: 'Concord', category: 'urban', x: 0.22, y: 0.15,
+      description: 'Town where you rescue the Minutemen. Raiders and a Deathclaw attack during the quest.' },
+    { id: 'walden', name: 'Walden Pond', category: 'landmarks', x: 0.20, y: 0.28,
+      description: 'Historic pond with a raider camp. Reference to Thoreau\'s famous retreat.' },
+    { id: 'robotics', name: 'Robotics Disposal Ground', category: 'industrial', x: 0.30, y: 0.12,
+      description: 'Robot junkyard. Contains a sentry bot you can activate.' },
+    { id: 'wicked', name: 'Wicked Shipping Fleet Lockup', category: 'industrial', x: 0.32, y: 0.08,
+      description: 'Shipping container yard with raiders. Contains a Master-locked trailer with loot.' },
+    { id: 'tenpines', name: 'Tenpines Bluff', category: 'settlements', x: 0.32, y: 0.18,
+      description: 'Small farm settlement. One of the first Minutemen quests sends you here.' },
+    { id: 'outpost', name: 'Outpost Zimonja', category: 'settlements', x: 0.38, y: 0.05,
+      description: 'Radio tower outpost. Defended by a raider with power armor.' },
+    { id: 'thicket', name: 'Thicket Excavations', category: 'industrial', x: 0.28, y: 0.32,
+      description: 'Flooded quarry. Contains a crashed vertibird and power armor underwater.' },
 
     // === NORTH-CENTRAL ===
     { id: 73, name: 'Parsons State Insane Asylum', category: 'dungeons', x: 0.42, y: 0.12,
@@ -34,6 +57,18 @@ const locations = [
       description: 'Beneath Malden Middle School. Experiment in selective breeding and combat training. The children never knew the truth.' },
     { id: 40, name: 'Corvega Assembly Plant', category: 'industrial', x: 0.50, y: 0.22,
       description: 'Massive car factory overrun by raiders. First major dungeon. Clear it for the Minutemen.' },
+    { id: 'malden', name: 'Malden Center', category: 'urban', x: 0.50, y: 0.20,
+      description: 'Ruined town with super mutants. The middle school hides Vault 75.' },
+    { id: 'medford', name: 'Medford Memorial Hospital', category: 'urban', x: 0.52, y: 0.15,
+      description: 'Hospital overrun with super mutants. Good medical supplies.' },
+    { id: 'greentop', name: 'Greentop Nursery', category: 'settlements', x: 0.55, y: 0.12,
+      description: 'Farm settlement in the north. Can be recruited to help the Minutemen.' },
+    { id: 'county_crossing', name: 'County Crossing', category: 'settlements', x: 0.62, y: 0.18,
+      description: 'Farm settlement near the coast. Grows mutfruit.' },
+    { id: 'finch', name: 'Finch Farm', category: 'settlements', x: 0.68, y: 0.22,
+      description: 'Farm under an overpass. Quest to retrieve a sword from the Forged.' },
+    { id: 'nordhagen', name: 'Nordhagen Beach', category: 'settlements', x: 0.72, y: 0.25,
+      description: 'Beach settlement on the northern coast.' },
 
     // === NORTHEAST ===
     { id: 43, name: 'Dunwich Borers', category: 'industrial', x: 0.72, y: 0.12,
@@ -46,12 +81,34 @@ const locations = [
       description: 'Forgers gang headquarters. They worship the flames. Slag leads them. Dangerous fire traps inside.' },
     { id: 31, name: 'National Guard Training Yard', category: 'military', x: 0.65, y: 0.25,
       description: 'Military facility with power armor and supplies. Heavily defended by feral ghouls.' },
+    { id: 'salem', name: 'Salem', category: 'urban', x: 0.85, y: 0.12,
+      description: 'Coastal town with Barney Rook and his turrets. Museum of Witchcraft nearby.' },
+    { id: 'coastal_cottage', name: 'Coastal Cottage', category: 'settlements', x: 0.88, y: 0.15,
+      description: 'Small coastal settlement location.' },
+    { id: 'kingsport', name: 'Kingsport Lighthouse', category: 'settlements', x: 0.90, y: 0.18,
+      description: 'Lighthouse settlement on the northeastern coast.' },
+    { id: 'croup', name: 'Croup Manor', category: 'settlements', x: 0.88, y: 0.22,
+      description: 'Manor haunted by ghouls. Settlement after clearing.' },
+    { id: 'nahant', name: 'Nahant Oceanological Society', category: 'landmarks', x: 0.92, y: 0.28,
+      description: 'Research facility on a peninsula. Mirelurks everywhere.' },
 
     // === WEST ===
     { id: 30, name: 'Fort Hagen', category: 'military', x: 0.15, y: 0.40,
       description: 'Pre-war military base. Kellogg, the man who killed your spouse and took Shaun, has been tracked here.' },
     { id: 21, name: 'Vault 81', category: 'vaults', x: 0.28, y: 0.48,
       description: 'A functioning vault that trades with outsiders. Secretly contains Curie, a Miss Nanny robot. A hidden section holds dark secrets.' },
+    { id: 'graygarden', name: 'Graygarden', category: 'settlements', x: 0.22, y: 0.35,
+      description: 'Greenhouse farm run entirely by Mr. Handy robots. Settlement.' },
+    { id: 'oberland', name: 'Oberland Station', category: 'settlements', x: 0.25, y: 0.42,
+      description: 'Train station settlement. Good central location.' },
+    { id: 'hangmans', name: 'Hangman\'s Alley', category: 'settlements', x: 0.42, y: 0.52,
+      description: 'Narrow alley settlement in downtown Boston. Limited space but central.' },
+    { id: 'sunshine', name: 'Sunshine Tidings Co-op', category: 'settlements', x: 0.18, y: 0.32,
+      description: 'Pre-war commune. Has a magazine and settlement potential.' },
+    { id: 'arcjet', name: 'ArcJet Systems', category: 'industrial', x: 0.20, y: 0.38,
+      description: 'Aerospace facility. Paladin Danse\'s mission takes you here. Lots of synths.' },
+    { id: 'rocky_narrows', name: 'Rocky Narrows Park', category: 'landmarks', x: 0.12, y: 0.35,
+      description: 'Park with a deathclaw and a crashed vertibird.' },
 
     // === CENTRAL BOSTON ===
     { id: 2, name: 'Diamond City', category: 'settlements', x: 0.48, y: 0.52,
@@ -84,6 +141,16 @@ const locations = [
       description: 'A fortified trading post at the base of the historic monument. Caravans regularly pass through. Secretly harbors synth refugees.' },
     { id: 55, name: 'Mass Bay Medical Center', category: 'urban', x: 0.52, y: 0.55,
       description: 'Hospital filled with super mutants. MacCready\'s son needs medicine from here.' },
+    { id: 'cit', name: 'C.I.T. Ruins', category: 'urban', x: 0.50, y: 0.45,
+      description: 'Commonwealth Institute of Technology. The Institute is hidden beneath.' },
+    { id: 'state_house', name: 'Massachusetts State House', category: 'landmarks', x: 0.46, y: 0.50,
+      description: 'Historic government building. Mirelurks infest the basement.' },
+    { id: 'park_station', name: 'Park Street Station', category: 'urban', x: 0.48, y: 0.52,
+      description: 'Metro station. Entrance to Vault 114 and Nick Valentine rescue mission.' },
+    { id: 'combat_zone', name: 'Combat Zone', category: 'landmarks', x: 0.50, y: 0.54,
+      description: 'Pre-war theater turned raider fight club. Cait the companion is found here.' },
+    { id: 'cabot', name: 'Cabot House', category: 'landmarks', x: 0.52, y: 0.42,
+      description: 'Home of the mysterious Cabot family. They have a dark secret and powerful serum.' },
 
     // === EAST/COAST ===
     { id: 62, name: 'USS Constitution', category: 'landmarks', x: 0.62, y: 0.35,
@@ -96,6 +163,10 @@ const locations = [
       description: 'Super mutant stronghold on an island. Contains Fat Man mini-nukes. Brotherhood assault target.' },
     { id: 5, name: 'The Castle', category: 'settlements', x: 0.75, y: 0.65,
       description: 'Fort Independence - the historic Minutemen headquarters. Retake it from the Mirelurks to restore the Minutemen to glory.' },
+    { id: 'libertalia', name: 'Libertalia', category: 'dungeons', x: 0.82, y: 0.45,
+      description: 'Raider flotilla built from wrecked ships. Difficult raider stronghold.' },
+    { id: 'east_city', name: 'East City Downs', category: 'landmarks', x: 0.65, y: 0.40,
+      description: 'Pre-war horse racing track. Now hosts robot racing run by Triggermen.' },
 
     // === SOUTH ===
     { id: 71, name: 'Gunners Plaza', category: 'dungeons', x: 0.52, y: 0.62,
@@ -104,12 +175,22 @@ const locations = [
       description: 'Town with a legendary treasure hunt. The "treasure" is hilariously disappointing but the journey is worthwhile.' },
     { id: 72, name: 'Quincy Ruins', category: 'dungeons', x: 0.62, y: 0.80,
       description: 'Where the Minutemen fell. Gunners massacred them here. Clint the traitor awaits justice.' },
+    { id: 'university', name: 'University Point', category: 'urban', x: 0.58, y: 0.75,
+      description: 'Destroyed settlement. The Institute eliminated everyone here for technology secrets.' },
+    { id: 'somerville', name: 'Somerville Place', category: 'settlements', x: 0.30, y: 0.75,
+      description: 'Farm settlement in the south near the Glowing Sea.' },
+    { id: 'murkwater', name: 'Murkwater Construction Site', category: 'settlements', x: 0.42, y: 0.82,
+      description: 'Construction site settlement. Mirelurk Queen nearby.' },
+    { id: 'warwick', name: 'Warwick Homestead', category: 'settlements', x: 0.68, y: 0.78,
+      description: 'Pumpkin farm on the coast. Institute quest involves replacing a family member.' },
 
     // === SOUTHEAST COAST ===
     { id: 'atom_cats', name: 'Atom Cats Garage', category: 'settlements', x: 0.60, y: 0.78,
       description: 'Power armor enthusiasts who dig cool threads and helping out. Rowdy runs the shop.' },
     { id: 'spectacle', name: 'Spectacle Island', category: 'settlements', x: 0.85, y: 0.72,
       description: 'Large island that can become a settlement after dealing with the Mirelurks. Luck bobblehead here.' },
+    { id: 'northern_star', name: 'Wreck of the FMS Northern Star', category: 'landmarks', x: 0.82, y: 0.68,
+      description: 'Norwegian ship wrecked on the coast. Agility bobblehead at the bow.' },
 
     // === SOUTHWEST - GLOWING SEA ===
     { id: 23, name: 'Vault 95', category: 'vaults', x: 0.25, y: 0.88,
@@ -119,7 +200,13 @@ const locations = [
     { id: 81, name: 'Rocky Cave', category: 'dungeons', x: 0.18, y: 0.88,
       description: 'Brian Virgil\'s hideout. The ex-Institute scientist holds the key to teleportation into the Institute.' },
     { id: 33, name: 'Sentinel Site', category: 'military', x: 0.20, y: 0.95,
-      description: 'Pre-war nuclear missile silo in the Glowing Sea. Contains a Mark 28 nuclear bomb for Liberty Prime.' }
+      description: 'Pre-war nuclear missile silo in the Glowing Sea. Contains a Mark 28 nuclear bomb for Liberty Prime.' },
+    { id: 'federal_ration', name: 'Federal Ration Stockpile', category: 'military', x: 0.12, y: 0.82,
+      description: 'Food supplies bunker in the Glowing Sea. Very radioactive.' },
+    { id: 'poseidon', name: 'Poseidon Energy', category: 'industrial', x: 0.30, y: 0.58,
+      description: 'Power plant with raiders. Endurance bobblehead inside.' },
+    { id: 'egret', name: 'Egret Tours Marina', category: 'settlements', x: 0.35, y: 0.68,
+      description: 'Marina settlement run by Phyllis. Mirelurks nearby.' }
 ];
 
 // Bobblehead collectibles with corrected coordinates
@@ -130,7 +217,7 @@ const collectibles = {
         { id: 'bb_end', name: 'Endurance Bobblehead', x: 0.30, y: 0.58, location: 'Poseidon Energy', description: 'In the central metal hut.' },
         { id: 'bb_cha', name: 'Charisma Bobblehead', x: 0.42, y: 0.12, location: 'Parsons State Insane Asylum', description: 'Jack Cabot\'s office.' },
         { id: 'bb_int', name: 'Intelligence Bobblehead', x: 0.44, y: 0.55, location: 'Boston Public Library', description: 'On the computer bank.' },
-        { id: 'bb_agi', name: 'Agility Bobblehead', x: 0.82, y: 0.65, location: 'Wreck of FMS Northern Star', description: 'On the bow of the ship.' },
+        { id: 'bb_agi', name: 'Agility Bobblehead', x: 0.82, y: 0.68, location: 'Wreck of FMS Northern Star', description: 'On the bow of the ship.' },
         { id: 'bb_lck', name: 'Luck Bobblehead', x: 0.85, y: 0.72, location: 'Spectacle Island', description: 'In a locker on a boat.' },
         { id: 'bb_barter', name: 'Barter Bobblehead', x: 0.78, y: 0.22, location: 'Longneck Lukowski\'s Cannery', description: 'On the metal catwalk.' },
         { id: 'bb_bigguns', name: 'Big Guns Bobblehead', x: 0.25, y: 0.88, location: 'Vault 95', description: 'In the living quarters.' },
